@@ -24,8 +24,11 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: Authenticate to github registry
+        run: echo "//npm.pkg.github.com/:_authToken={{ secrets.GH_NPM_TOKEN }}" >> .npmrc
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: build
         env:
