@@ -2,5 +2,5 @@ import { redirect } from '@sveltejs/kit'
 import type { PageLoad } from './$types'
 
 export const load: PageLoad = async () => {
-	return redirect(302, '/2024/qualifier')
+	return redirect(302, '/awc2025/qualifier')
 }

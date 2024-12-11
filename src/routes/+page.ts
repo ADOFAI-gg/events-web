@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit'
 
 export const load = async () => {
-	return redirect(302, '/2024')
+	return redirect(302, '/awc2025')
 }
