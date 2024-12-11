@@ -25,7 +25,7 @@ jobs:
           cache: pnpm
 
       - name: Authenticate to github registry
-        run: echo "//npm.pkg.github.com/:_authToken={{ secrets.GH_NPM_TOKEN }}" >> .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_NPM_TOKEN }}" >> .npmrc
 
       - name: Install dependencies
         run: pnpm install
