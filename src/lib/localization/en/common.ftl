@@ -1,0 +1,10 @@
+no-records = No Records.
+hitmargin-too-early = Too Early
+hitmargin-early = Early
+hitmargin-early-perfect = EPerfect
+hitmargin-perfect = Perfect
+hitmargin-late-perfect = LPerfect
+hitmargin-late = Late
+hitmargin-too-late = Too Late
+hitmargin-miss = Miss
+hitmargin-overload = Overload
