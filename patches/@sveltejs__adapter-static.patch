@@ -1,0 +1,13 @@
+diff --git a/index.js b/index.js
+index c5e0d68efa42ee1d2392e118595aaaf6a53d0d9f..3b6eaeb8480baaa95fb8c197db45062f6e8bb2e0 100644
+--- a/index.js
++++ b/index.js
+@@ -86,6 +86,8 @@ See https://svelte.dev/docs/kit/page-options#prerender for more details`
+ 			}
+ 
+ 			if (!options) platform?.done(builder);
++
++			process.exit(0)
+ 		}
+ 	};
+ }

@@ -6,7 +6,7 @@
 	import 'nprogress/nprogress.css'
 	import '../global.scss'
 
-	import NProgress from 'nprogress'
+	import * as NProgress from 'nprogress'
 
 	import '@fontsource/ibm-plex-sans-kr/300.css'
 	import '@fontsource/ibm-plex-sans-kr/400.css'
@@ -24,7 +24,7 @@
 		Nav,
 		setGlobalContext
 	} from '@adofai-gg/ui'
-	import { readable, writable } from 'svelte/store'
+	import { writable } from 'svelte/store'
 	import { navigating } from '$app/stores'
 	import MeltComponent from '$lib/components/MeltComponent.svelte'
 
@@ -33,15 +33,6 @@
 	}
 
 	const { children }: Props = $props()
-
-	// const languageMapping: Record<string, string> = {
-	// 	ko: 'ko',
-	// 	'ko-KR': 'ko',
-	// 	en: 'en',
-	// 	'en-US': 'en'
-	// }
-	// const languages = new Set(Object.values(languageMapping))
-
 	const lang = writable(getLangCode(localStorage.language || navigator.language))
 
 	const setLanguage = (l: string) => {
