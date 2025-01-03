@@ -1,4 +1,4 @@
 [[paths]]
-reference = "src/lib/localization/ko/**"
-l10n = "src/lib/localization/{locale}/**"
+reference = "src/lib/localization/ko/*"
+l10n = "src/lib/localization/{locale}/*"
 locales = ["en", "ko", "ja", "zh-CN"]
