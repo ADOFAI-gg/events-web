@@ -1,7 +1,12 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte'
 
+	import '$lib/index'
 	import '@adofai-gg/ui/globals.scss'
+	import 'nprogress/nprogress.css'
+	import '../global.scss'
+
+	import NProgress from 'nprogress'
 
 	import '@fontsource/ibm-plex-sans-kr/300.css'
 	import '@fontsource/ibm-plex-sans-kr/400.css'
@@ -9,8 +14,19 @@
 	import '@fontsource/ibm-plex-sans-kr/600.css'
 	import '@fontsource/ibm-plex-sans-kr/700.css'
 
-	import { Nav, setGlobalContext } from '@adofai-gg/ui'
-	import { readable } from 'svelte/store'
+	import {
+		availableLanguages,
+		Menu,
+		MenuRadioGroup,
+		MenuRadioItem,
+		getLangCode,
+		IconProvider,
+		Nav,
+		setGlobalContext
+	} from '@adofai-gg/ui'
+	import { readable, writable } from 'svelte/store'
+	import { navigating } from '$app/stores'
+	import MeltComponent from '$lib/components/MeltComponent.svelte'
 
 	interface Props {
 		children?: Snippet
@@ -18,18 +34,65 @@
 
 	const { children }: Props = $props()
 
+	// const languageMapping: Record<string, string> = {
+	// 	ko: 'ko',
+	// 	'ko-KR': 'ko',
+	// 	en: 'en',
+	// 	'en-US': 'en'
+	// }
+	// const languages = new Set(Object.values(languageMapping))
+
+	const lang = writable(getLangCode(localStorage.language || navigator.language))
+
+	const setLanguage = (l: string) => {
+		lang.set(l)
+		localStorage.language = l
+	}
+
 	setGlobalContext({
-		language: readable('en'),
+		language: lang,
 		links: [],
-		setLanguage: () => {},
+		setLanguage,
 		urls: {
 			main: '/',
 			signIn: '/',
 			signUp: '/'
 		}
 	})
+
+	$effect(() => {
+		if ($navigating) {
+			NProgress.start()
+		} else {
+			NProgress.done()
+		}
+	})
 </script>
 
-<Nav user={null} minimal />
+<Nav user={null} minimal>
+	{#snippet rightSlot()}
+		<Menu>
+			{#snippet button({ trigger })}
+				<MeltComponent meltElement={trigger} element="button" props={{}}>Language</MeltComponent>
+			{/snippet}
+
+			<MenuRadioGroup
+				value={$lang}
+				onchange={(v) => {
+					if (!v) return
+					setLanguage(v)
+				}}
+			>
+				{#each availableLanguages as language}
+					<MenuRadioItem value={language.code}>
+						{language.name}
+					</MenuRadioItem>
+				{/each}
+			</MenuRadioGroup>
+		</Menu>
+	{/snippet}
+</Nav>
 
 {@render children?.()}
+
+<IconProvider />

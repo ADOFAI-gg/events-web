@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@adofai-gg/ui':
-        specifier: 1.2.0-beta.59
-        version: 1.2.0-beta.59(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)
+        specifier: 1.2.0-beta.65
+        version: 1.2.0-beta.65(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)
       '@eslint/compat':
         specifier: ^1.2.3
         version: 1.2.4(eslint@9.16.0)
@@ -20,6 +20,12 @@ importers:
       '@fontsource/ibm-plex-sans-kr':
         specifier: ^5.1.0
         version: 5.1.0
+      '@melt-ui/pp':
+        specifier: ^0.3.2
+        version: 0.3.2(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)
+      '@melt-ui/svelte':
+        specifier: ^0.86.2
+        version: 0.86.2(svelte@5.10.1)
       '@sveltejs/adapter-static':
         specifier: ^3.0.6
         version: 3.0.6(@sveltejs/kit@2.10.1(@sveltejs/vite-plugin-svelte@5.0.1(svelte@5.10.1)(vite@6.0.3(sass-embedded@1.82.0)))(svelte@5.10.1)(vite@6.0.3(sass-embedded@1.82.0)))
@@ -29,6 +35,9 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.0
         version: 5.0.1(svelte@5.10.1)(vite@6.0.3(sass-embedded@1.82.0))
+      '@types/nprogress':
+        specifier: ^0.2.3
+        version: 0.2.3
       eslint:
         specifier: ^9.7.0
         version: 9.16.0
@@ -41,6 +50,9 @@ importers:
       globals:
         specifier: ^15.0.0
         version: 15.13.0
+      nprogress:
+        specifier: ^0.2.0
+        version: 0.2.0
       prettier:
         specifier: ^3.3.2
         version: 3.4.2
@@ -68,8 +80,8 @@ importers:
 
 packages:
 
-  '@adofai-gg/ui@1.2.0-beta.59':
-    resolution: {integrity: sha512-ulgXx5P3CXOYGtehIV3le9fpl9m+45CK61uTZQPqlCsceCiXblaA6NNdKNWdU2JG/WhFV1oacQi6RGVIA6Olaw==, tarball: https://npm.pkg.github.com/download/@adofai-gg/ui/1.2.0-beta.59/56d3b66b5d8170b7adcac4ca06a9dae8e9f837cd}
+  '@adofai-gg/ui@1.2.0-beta.65':
+    resolution: {integrity: sha512-BZ4TPJoc4a0GsfDL0uFH0LJggbo+7miIHhD3Aio1O9fEg2JXX5c6WBAMaMio2amkIpxriZEmJumW17gNpxNMIw==, tarball: https://npm.pkg.github.com/download/@adofai-gg/ui/1.2.0-beta.65/458624cd500b18cfde65faa68c8e0aacfde39f1c}
     peerDependencies:
       '@melt-ui/svelte': '*'
       svelte: '5'
@@ -325,6 +337,12 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@melt-ui/pp@0.3.2':
+    resolution: {integrity: sha512-xKkPvaIAFinklLXcQOpwZ8YSpqAFxykjWf8Y/fSJQwsixV/0rcFs07hJ49hJjPy5vItvw5Qa0uOjzFUbXzBypQ==}
+    peerDependencies:
+      '@melt-ui/svelte': '>= 0.29.0'
+      svelte: ^3.55.0 || ^4.0.0 || ^5.0.0-next.1
+
   '@melt-ui/svelte@0.86.2':
     resolution: {integrity: sha512-wRVN603oIt1aXvx2QRmKqVDJgTScSvr/WJLLokkD8c4QzHgn6pfpPtUKmhV6Dvkk+OY89OG/1Irkd6ouA50Ztw==}
     peerDependencies:
@@ -480,6 +498,9 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/nprogress@0.2.3':
+    resolution: {integrity: sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA==}
 
   '@typescript-eslint/eslint-plugin@8.18.0':
     resolution: {integrity: sha512-NR2yS7qUqCL7AIxdJUQf2MKKNDVNaig/dEB0GBLU7D+ZdHgK1NoH/3wsgO3OnPVipn51tG3MAwaODEGil70WEw==}
@@ -725,6 +746,9 @@ packages:
     resolution: {integrity: sha512-MMdARuVEQziNTeJD8DgMqmhwR11BRQ/cBP+pLtYdSTnf3MIO8fFeiINEbX36ZdNlfU/7A9f3gUw49B3oQsvwBA==}
     engines: {node: '>=4.0'}
 
+  estree-walker@3.0.3:
+    resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}
+
   esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
@@ -931,6 +955,9 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -1355,7 +1382,7 @@ packages:
 
 snapshots:
 
-  '@adofai-gg/ui@1.2.0-beta.59(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)':
+  '@adofai-gg/ui@1.2.0-beta.65(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)':
     dependencies:
       '@melt-ui/svelte': 0.86.2(svelte@5.10.1)
       clsx: 2.1.1
@@ -1536,6 +1563,13 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@melt-ui/pp@0.3.2(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)':
+    dependencies:
+      '@melt-ui/svelte': 0.86.2(svelte@5.10.1)
+      estree-walker: 3.0.3
+      magic-string: 0.30.15
+      svelte: 5.10.1
+
   '@melt-ui/svelte@0.86.2(svelte@5.10.1)':
     dependencies:
       '@floating-ui/core': 1.6.8
@@ -1670,6 +1704,8 @@ snapshots:
   '@types/estree@1.0.6': {}
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/nprogress@0.2.3': {}
 
   '@typescript-eslint/eslint-plugin@8.18.0(@typescript-eslint/parser@8.18.0(eslint@9.16.0)(typescript@5.7.2))(eslint@9.16.0)(typescript@5.7.2)':
     dependencies:
@@ -1976,6 +2012,10 @@ snapshots:
 
   estraverse@5.3.0: {}
 
+  estree-walker@3.0.3:
+    dependencies:
+      '@types/estree': 1.0.6
+
   esutils@2.0.3: {}
 
   fast-deep-equal@3.1.3: {}
@@ -2137,6 +2177,8 @@ snapshots:
   nanoid@5.0.9: {}
 
   natural-compare@1.4.0: {}
+
+  nprogress@0.2.0: {}
 
   optionator@0.9.4:
     dependencies:
