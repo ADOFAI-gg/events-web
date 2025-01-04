@@ -22,7 +22,8 @@
 		getLangCode,
 		IconProvider,
 		Nav,
-		setGlobalContext
+		setGlobalContext,
+		Icon
 	} from '@adofai-gg/ui'
 	import { writable } from 'svelte/store'
 	import { navigating } from '$app/stores'
@@ -64,7 +65,9 @@
 	{#snippet rightSlot()}
 		<Menu>
 			{#snippet button({ trigger })}
-				<MeltComponent meltElement={trigger} element="button" props={{}}>Language</MeltComponent>
+				<MeltComponent meltElement={trigger} element="button" props={{}}>
+					<Icon alt="language" icon="globe" size={24} />
+				</MeltComponent>
 			{/snippet}
 
 			<MenuRadioGroup

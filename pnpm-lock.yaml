@@ -14,8 +14,8 @@ importers:
   .:
     devDependencies:
       '@adofai-gg/ui':
-        specifier: 1.2.0-beta.66
-        version: 1.2.0-beta.66(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)
+        specifier: 1.2.0-beta.69
+        version: 1.2.0-beta.69(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)
       '@eslint/compat':
         specifier: ^1.2.3
         version: 1.2.4(eslint@9.16.0)
@@ -85,8 +85,8 @@ importers:
 
 packages:
 
-  '@adofai-gg/ui@1.2.0-beta.66':
-    resolution: {integrity: sha512-HW/x6RmrOpTCwmZZ4VXCFHKTYbFKtddmdF1FbsFqbpM/VV4jIPjTi5uRPferX/6Vf6TaWUM4ZCNxSW/0rHQAig==, tarball: https://npm.pkg.github.com/download/@adofai-gg/ui/1.2.0-beta.66/e5d324853e454b1e6cb490e2f294cdea44611659}
+  '@adofai-gg/ui@1.2.0-beta.69':
+    resolution: {integrity: sha512-HL70PEQkYHQid68deLeCgvA9SZrkgtL/JLEpA/uEWdGWBPB6ORSadeZuL/q+RyqyXNtf+F6Xa+cYSWlulwTyrg==, tarball: https://npm.pkg.github.com/download/@adofai-gg/ui/1.2.0-beta.69/ea9467ecff2cd57363d44606b0862e48b3b34995}
     peerDependencies:
       '@melt-ui/svelte': '*'
       svelte: '5'
@@ -1397,7 +1397,7 @@ packages:
 
 snapshots:
 
-  '@adofai-gg/ui@1.2.0-beta.66(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)':
+  '@adofai-gg/ui@1.2.0-beta.69(@melt-ui/svelte@0.86.2(svelte@5.10.1))(svelte@5.10.1)':
     dependencies:
       '@melt-ui/svelte': 0.86.2(svelte@5.10.1)
       clsx: 2.1.1
