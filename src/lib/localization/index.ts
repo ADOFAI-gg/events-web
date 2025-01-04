@@ -1,7 +1,7 @@
 import { registerTranslations, excludeLanguages } from '@adofai-gg/ui'
 import { extraSections } from './constants'
 
-excludeLanguages('vi')
+excludeLanguages('vi', 'zh-CN')
 
 const translationData = Object.fromEntries(
 	Object.entries(
