@@ -62,9 +62,15 @@ export const load: PageLoad = async (ev) => {
 		}
 	}
 
-	const records: (PlayRecord | null)[] = Object.values(recordMap)
+	const records: PlayRecord[] = Object.values(recordMap)
 
-	records.sort((a, b) => b!.xAcc - a!.xAcc)
+	records.sort(
+		(a, b) =>
+			b.xAcc - a.xAcc ||
+			b.hitMargins[8] + b.hitMargins[9] - (a.hitMargins[8] + a.hitMargins[9]) ||
+			b.hitMargins[3] - a.hitMargins[3] ||
+			b.updatedAt - a.updatedAt
+	)
 
 	if (records.length < 32 && records.length !== 0) {
 		records.push(...new Array(32 - records.length).fill(null))
