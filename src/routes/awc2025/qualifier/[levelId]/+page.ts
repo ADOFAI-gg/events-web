@@ -18,14 +18,14 @@ interface PlayRecord {
 }
 
 const items: LevelDefinition[] = [
-	// {
-	// 	id: '',
-	// 	name: 'awc2025:qualifier-level-a'
-	// },
-	// {
-	// 	id: '',
-	// 	name: 'awc2025:qualifier-level-b'
-	// }
+	{
+		id: '13e823a1e3b13effeaf45407fdcbc8f6',
+		name: 'awc2025:qualifier-level-a'
+	},
+	{
+		id: '4e252b743aff12697859963e2e226cad',
+		name: 'awc2025:qualifier-level-b'
+	}
 ]
 
 export const load: PageLoad = async (ev) => {
