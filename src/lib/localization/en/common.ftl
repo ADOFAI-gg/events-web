@@ -1,5 +1,5 @@
 no-records = No Records.
-cut-line = Cut Off Line
+cut-line = Passing Line
 hitmargin-too-early = Too Early
 hitmargin-early = Early
 hitmargin-early-perfect = EPerfect
