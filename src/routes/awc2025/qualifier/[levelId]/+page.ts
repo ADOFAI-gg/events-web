@@ -64,13 +64,16 @@ export const load: PageLoad = async (ev) => {
 
 	const records: PlayRecord[] = Object.values(recordMap)
 
-	records.sort(
-		(a, b) =>
-			b.xAcc - a.xAcc ||
-			b.hitMargins[8] + b.hitMargins[9] - (a.hitMargins[8] + a.hitMargins[9]) ||
-			b.hitMargins[3] - a.hitMargins[3] ||
-			b.updatedAt - a.updatedAt
-	)
+	records.sort((a, b) => {
+		const xacc = b.xAcc - a.xAcc
+		const miss = a.hitMargins[8] + a.hitMargins[9] - b.hitMargins[8] + b.hitMargins[9]
+		const perf = b.hitMargins[3] - a.hitMargins[3]
+		const time = a.updatedAt - b.updatedAt
+
+		return xacc || miss || perf || time
+	})
+
+	console.log(records)
 
 	if (records.length < 32 && records.length !== 0) {
 		records.push(...new Array(32 - records.length).fill(null))
