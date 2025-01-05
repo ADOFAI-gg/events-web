@@ -55,6 +55,7 @@ export const load: PageLoad = async (ev) => {
 
 			const existing = recordMap[item.id]
 			existing.xAcc += item.xAcc
+			existing.updatedAt += item.updatedAt
 
 			for (let i = 0; i < 12; i++) {
 				existing.hitMargins[i] += item.hitMargins[i]
