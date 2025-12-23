@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Localized } from '@nubolab-ffwd/svelte-fluent';
+	import { getFluentContext, Localized } from '@nubolab-ffwd/svelte-fluent';
 	import type { PageProps } from './$types';
 	import { fade } from 'svelte/transition';
 	import { Avatar } from '@adofai-gg/ui';
@@ -16,6 +16,10 @@
 			...data.levels
 		];
 	});
+
+	const { localize } = getFluentContext();
+
+	const cutlineText = $derived(localize('cut-line'));
 </script>
 
 <h1 class="text-4xl font-medium">
@@ -40,13 +44,13 @@
 	{/each}
 </div>
 
-<div class="mt-2">
+<div class="mt-2" style="--cutline-text: '{cutlineText}';">
 	{#each data.records as record, idx (record.id)}
 		{@const ordinal = idx + 1}
 
 		{@const hitMargins = record.hitMargins}
 
-		<div class="border-b border-white/20 p-4 flex items-center gap-4">
+		<div class="border-b border-white/20 p-4 flex items-center gap-4 record relative">
 			<div class="text-2xl w-12 text-center before:content-['#']">
 				{ordinal}
 			</div>
@@ -87,4 +91,14 @@
 	{/each}
 </div>
 
-<!-- <pre><code>{JSON.stringify(data, null, 2)}</code></pre> -->
+<style>
+	@reference "../../../../../app.css";
+
+	.record:nth-child(32)::before {
+		@apply bg-gg-yellow w-full h-0.5 left-0 bottom-0 content-[''] absolute;
+	}
+
+	.record:nth-child(32)::after {
+		@apply content-(--cutline-text) absolute left-0 bottom-0 translate-y-1/2 bg-gg-yellow rounded-md font-medium text-sm text-black px-2 py-0.5;
+	}
+</style>
