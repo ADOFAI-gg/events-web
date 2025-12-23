@@ -17,3 +17,11 @@ awc2025-qualifier-title = AWC 2025 예선 리더보드
 awc2025-qualifier-level-all = 전체
 awc2025-qualifier-level-a = 레벨 A
 awc2025-qualifier-level-b = 레벨 B
+
+awc2026-qualifier-title = AWC 2026 예선 리더보드
+
+awc2026-qualifier-level-all = 전체
+awc2026-qualifier-level-a = 레벨 A
+awc2026-qualifier-level-b = 레벨 B
+
+awc2026-course-per-level = 레벨별 정보

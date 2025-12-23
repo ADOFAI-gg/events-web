@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
-	return redirect(302, '/awc2026');
+export const load: PageLoad = () => {
+	return redirect(301, '/awc2026/qualifier');
 };

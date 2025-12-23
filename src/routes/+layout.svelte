@@ -75,6 +75,10 @@
 		<Nav.Root
 			links={[
 				{
+					href: '/awc2026',
+					title: 'AWC 2026'
+				},
+				{
 					href: '/awc2025',
 					title: 'AWC 2025'
 				}
