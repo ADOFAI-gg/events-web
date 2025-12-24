@@ -1,8 +1,9 @@
 <script lang="ts">
+	import type { HitMarginList } from '../types';
 	import DividerDot from './divider-dot.svelte';
 
 	type Props = {
-		hitMargins: number[];
+		hitMargins: HitMarginList;
 	};
 
 	const { hitMargins }: Props = $props();

@@ -3,7 +3,7 @@
 	import type { PageProps } from './$types';
 	import { fade } from 'svelte/transition';
 	import CourseRecord from '../../components/course-record.svelte';
-	import { createVirtualizer, createWindowVirtualizer } from '$lib/virtualizer.svelte';
+	import { createWindowVirtualizer } from '$lib/virtualizer.svelte';
 
 	const tabs = $derived.by(() => {
 		return [
@@ -17,13 +17,18 @@
 		];
 	});
 
-	const { params }: PageProps = $props();
+	const { params, data }: PageProps = $props();
 
-	const virtualizer = createWindowVirtualizer({
-		count: 3000,
-		estimateSize: () => 60,
-		overscan: 3
-	});
+	const records = $derived(data.records);
+	const totalLevelCount = $derived(data.totalLevelCount);
+
+	const virtualizer = $derived(
+		createWindowVirtualizer({
+			count: records.length,
+			estimateSize: () => 60,
+			overscan: 3
+		})
+	);
 
 	let elements = $state<HTMLDivElement[]>([]);
 
@@ -64,8 +69,9 @@
 		class="absolute top-0 left-0 w-full"
 	>
 		{#each virtualItems as item, i (item.index)}
+			{@const record = records[item.index]}
 			<div bind:this={elements[i]} data-index={item.index}>
-				<CourseRecord ordinal={item.index + 1} />
+				<CourseRecord {record} ordinal={item.index + 1} isMultiple={totalLevelCount > 1} />
 			</div>
 		{/each}
 	</div>

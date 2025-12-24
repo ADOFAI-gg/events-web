@@ -13,5 +13,14 @@ export default defineConfig({
 	},
 	ssr: {
 		noExternal: ['@nubolab-ffwd/svelte-fluent', '@adofai-gg/ui']
+	},
+	server: {
+		proxy: {
+			'/api/course/': {
+				target: 'https://course.adofai.gg',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api\/course\//, '/api/')
+			}
+		}
 	}
 });
