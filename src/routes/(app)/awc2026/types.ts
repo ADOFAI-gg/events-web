@@ -1,5 +1,5 @@
 export type CourseRankingData = {
-	course: CourseInfo;
+	course?: CourseInfo;
 	records: CourseRecord[];
 };
 

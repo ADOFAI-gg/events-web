@@ -2,12 +2,13 @@ import { encode } from '@adofai-gg/ui';
 import type { PageLoad } from './$types';
 import ky from 'ky';
 import type { AggregatedReocrd, CourseRankingData, CourseRecord, HitMarginList } from '../../types';
-import { dev } from '$app/environment';
 import { error } from '@sveltejs/kit';
+import { dev } from '$app/environment';
 
 const levels = {
-	a: '693d269f801b21c1c3956676',
-	b: '693d269f801b21c1c3956676'
+	test: '693d269f801b21c1c3956676',
+	a: '693d40de801b21c1c39569ea',
+	b: '693d40e8801b21c1c39569fd'
 } as Record<string, string>;
 
 export const load: PageLoad = async ({ fetch, params }) => {
@@ -17,6 +18,8 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		ids.push(...Object.values(levels));
 	} else if (levels[params.level]) {
 		ids.push(levels[params.level]);
+	} else if (dev) {
+		ids.push(params.level);
 	} else {
 		return error(404);
 	}
@@ -29,7 +32,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 			fetch
 		}).json<CourseRankingData>();
 
-		totalLevelCount += res.course.levelCount;
+		totalLevelCount += res.course?.levelCount ?? 0;
 
 		for (const record of res.records) {
 			const existing = aggregated[record.user.displayName];
