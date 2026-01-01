@@ -58,7 +58,7 @@
 			<div class="border-white/20 border-y divide-y divide-white/20 mt-2">
 				{#each record.playRecords as playRecord}
 					<div class="p-4 flex lg:items-center lg:gap-4 lg:justify-between flex-col lg:flex-row">
-						<div class="text-left">HYONSU - Sans Universe</div>
+						<div class="text-left">{playRecord.levelName}</div>
 
 						<div class="flex gap-2 items-center flex-wrap">
 							<div class="flex items-center gap-1 text-white/60">

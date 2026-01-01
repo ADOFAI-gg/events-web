@@ -2,8 +2,6 @@ import { encode } from '@adofai-gg/ui';
 import type { PageLoad } from './$types';
 import ky from 'ky';
 import type { AggregatedReocrd, CourseRankingData, CourseRecord, HitMarginList } from '../../types';
-import { error } from '@sveltejs/kit';
-import { dev } from '$app/environment';
 
 const levels = {
 	test: '693d269f801b21c1c3956676',
@@ -18,10 +16,8 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		ids.push(...Object.values(levels));
 	} else if (levels[params.level]) {
 		ids.push(levels[params.level]);
-	} else if (dev) {
-		ids.push(params.level);
 	} else {
-		return error(404);
+		ids.push(params.level);
 	}
 
 	const aggregated = {} as Record<string, AggregatedReocrd>;
@@ -32,14 +28,23 @@ export const load: PageLoad = async ({ fetch, params }) => {
 			fetch
 		}).json<CourseRankingData>();
 
-		totalLevelCount += res.course?.levelCount ?? 0;
-
 		for (const record of res.records) {
+			const levels = res.course?.levels;
+			const getLevelName = (i: number) => {
+				const level = levels?.[i];
+				if (!level) return '';
+				return `${level.artist} - ${level.song}`;
+			};
+
 			const existing = aggregated[record.user.displayName];
 			if (!existing) {
 				aggregated[record.user.displayName] = {
 					...record,
-					sum: getCourseSum(record)
+					sum: getCourseSum(record),
+					playRecords: record.playRecords.map((x, i) => ({
+						...x,
+						levelName: getLevelName(i)
+					}))
 				};
 				continue;
 			}
@@ -49,8 +54,15 @@ export const load: PageLoad = async ({ fetch, params }) => {
 			existing.sum.hitMargins = sumHitMargins(existing.sum.hitMargins, currentSum.hitMargins);
 			existing.sum.xAcc += currentSum.xAcc;
 
-			existing.playRecords.push(...existing.playRecords);
+			existing.playRecords.push(
+				...record.playRecords.map((x, i) => ({
+					...x,
+					levelName: getLevelName(i)
+				}))
+			);
 		}
+
+		totalLevelCount += res.course?.levelCount ?? 0;
 	}
 
 	return {
