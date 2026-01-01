@@ -4,7 +4,6 @@ import ky from 'ky';
 import type { AggregatedReocrd, CourseRankingData, CourseRecord, HitMarginList } from '../../types';
 
 const levels = {
-	test: '693d269f801b21c1c3956676',
 	a: '693d40de801b21c1c39569ea',
 	b: '693d40e8801b21c1c39569fd'
 } as Record<string, string>;
