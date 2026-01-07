@@ -1,7 +1,6 @@
 import { encode } from '@adofai-gg/ui';
 import type { AggregatedReocrd, CourseRankingData, CourseRecord, HitMarginList } from '../types';
-import ky from 'ky';
-import type { FetchFunction } from 'vite';
+import ky, { HTTPError } from 'ky';
 import type { RequestEvent } from '@sveltejs/kit';
 
 export const fetechCourseRecords = async (
@@ -14,7 +13,18 @@ export const fetechCourseRecords = async (
 	for (const id of ids) {
 		const res = await ky(encode`https://course.adofai.gg/api/courses/${id}/ranking`, {
 			fetch
-		}).json<CourseRankingData>();
+		})
+			.json<CourseRankingData>()
+			.catch((e) => {
+				if (e instanceof HTTPError) {
+					if (e.response.status !== 404) return Promise.reject(e);
+				}
+
+				return {
+					records: [],
+					course: undefined
+				} as CourseRankingData;
+			});
 
 		for (const record of res.records) {
 			const levels = res.course?.levels;
