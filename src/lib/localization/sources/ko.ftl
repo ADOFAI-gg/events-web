@@ -25,3 +25,5 @@ awc2026-qualifier-level-a = 레벨 A
 awc2026-qualifier-level-b = 레벨 B
 
 awc2026-course-per-level = 레벨별 정보
+
+awc2026-course-title = AWC 2026 코스 리더보드

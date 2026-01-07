@@ -1,7 +1,5 @@
-import { encode } from '@adofai-gg/ui';
 import type { PageLoad } from './$types';
-import ky from 'ky';
-import type { AggregatedReocrd, CourseRankingData, CourseRecord, HitMarginList } from '../../types';
+import { fetechCourseRecords } from '../../util/aggregator';
 
 const levels = {
 	a: '693d40de801b21c1c39569ea',
@@ -19,72 +17,10 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		ids.push(params.level);
 	}
 
-	const aggregated = {} as Record<string, AggregatedReocrd>;
-	let totalLevelCount = 0;
-
-	for (const id of ids) {
-		const res = await ky(encode`https://course.adofai.gg/api/courses/${id}/ranking`, {
-			fetch
-		}).json<CourseRankingData>();
-
-		for (const record of res.records) {
-			const levels = res.course?.levels;
-			const getLevelName = (i: number) => {
-				const level = levels?.[i];
-				if (!level) return '';
-				return `${level.artist} - ${level.song}`;
-			};
-
-			const existing = aggregated[record.user.displayName];
-			if (!existing) {
-				aggregated[record.user.displayName] = {
-					...record,
-					sum: getCourseSum(record),
-					playRecords: record.playRecords.map((x, i) => ({
-						...x,
-						levelName: getLevelName(i)
-					}))
-				};
-				continue;
-			}
-
-			const currentSum = getCourseSum(record);
-
-			existing.sum.hitMargins = sumHitMargins(existing.sum.hitMargins, currentSum.hitMargins);
-			existing.sum.xAcc += currentSum.xAcc;
-			existing.createdAt += record.createdAt
-
-			existing.playRecords.push(
-				...record.playRecords.map((x, i) => ({
-					...x,
-					levelName: getLevelName(i)
-				}))
-			);
-		}
-
-		totalLevelCount += res.course?.levelCount ?? 0;
-	}
-	
-	const records = Object.values(aggregated)
-	.sort((a, b) => {
-		return (b.xAccSum - a.xAccSum) || (a.createdAt - b.createdAt)
-	})
+	const { records, totalLevelCount } = await fetechCourseRecords(ids, { fetch });
 
 	return {
 		records,
 		totalLevelCount
-	};
-};
-
-const sumHitMargins = (...hitMargins: HitMarginList[]): HitMarginList => {
-	return hitMargins.reduce((a, b) => a.map((x, i) => x + b[i]) as HitMarginList, [
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-	] as HitMarginList);
-};
-
-const getCourseSum = (record: CourseRecord): AggregatedReocrd['sum'] => {
-	return {
-		hitMargins: sumHitMargins(...record.playRecords.map((x) => x.hitMargins)),
-		xAcc: record.playRecords.reduce((a, b) => a + b.xAcc, 0)
 	};
 };
