@@ -52,6 +52,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 
 			existing.sum.hitMargins = sumHitMargins(existing.sum.hitMargins, currentSum.hitMargins);
 			existing.sum.xAcc += currentSum.xAcc;
+			existing.createdAt += record.createdAt
 
 			existing.playRecords.push(
 				...record.playRecords.map((x, i) => ({
@@ -63,9 +64,14 @@ export const load: PageLoad = async ({ fetch, params }) => {
 
 		totalLevelCount += res.course?.levelCount ?? 0;
 	}
+	
+	const records = Object.values(aggregated)
+	.sort((a, b) => {
+		return (b.xAccSum - a.xAccSum) || (a.createdAt - b.createdAt)
+	})
 
 	return {
-		records: Object.values(aggregated),
+		records,
 		totalLevelCount
 	};
 };

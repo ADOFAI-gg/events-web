@@ -34,6 +34,7 @@ export type CourseRecord = {
 	user: CourseUser;
 	xAccSum: number;
 	playRecords: CoursePlayRecord[];
+	createdAt: number
 };
 
 export type AggregatedReocrd = Omit<CourseRecord, 'playRecords'> & {
@@ -42,6 +43,7 @@ export type AggregatedReocrd = Omit<CourseRecord, 'playRecords'> & {
 		hitMargins: HitMarginList;
 	};
 	playRecords: AggregatedPlayRecord[];
+	createdAt: number
 };
 
 export type CoursePlayRecord = {
