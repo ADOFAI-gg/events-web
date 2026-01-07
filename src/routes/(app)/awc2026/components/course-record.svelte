@@ -37,7 +37,7 @@
 			<div class="flex gap-2 items-center flex-wrap">
 				<div class="flex items-center gap-1 text-white/60">
 					<Icon icon="ggev:accuracy" class="size-3.5" />
-					<span class="after:content-['%']">{(record.sum.xAcc * 100).toFixed(3)}</span>
+					<span class="after:content-['%']">{(record.sum.xAcc * 100).toFixed(4)}</span>
 				</div>
 
 				<DividerDot />
@@ -63,7 +63,7 @@
 						<div class="flex gap-2 items-center flex-wrap">
 							<div class="flex items-center gap-1 text-white/60">
 								<Icon icon="ggev:accuracy" class="size-3.5" />
-								<span class="after:content-['%']">{(playRecord.xAcc * 100).toFixed(3)}</span>
+								<span class="after:content-['%']">{(playRecord.xAcc * 100).toFixed(4)}</span>
 							</div>
 
 							<DividerDot />
