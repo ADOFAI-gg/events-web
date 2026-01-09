@@ -54,7 +54,7 @@
 			<div class="text-2xl w-12 text-center before:content-['#']">
 				{ordinal}
 			</div>
-			<Avatar src={record.avatarUrl} class="size-12" />
+			<Avatar src={record.avatarUrl} class="size-12 shrink-0" />
 			<div class="flex flex-col">
 				<div class="text-xl font-medium">
 					{record.displayName}
