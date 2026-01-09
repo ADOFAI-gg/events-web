@@ -40,7 +40,12 @@ export const load: PageLoad = async (ev) => {
 	if (idsToFetch.length === 0 && id !== 'all') return error(404, 'level not found');
 
 	for (const level of idsToFetch) {
-		const data: PlayRecord[] = (await import(`./data/${level.id}.json`)).default;
+		const data: PlayRecord[] = [...(await import(`./data/${level.id}.json`)).default].map(
+			(x: PlayRecord) => ({
+				...x,
+				hitMargins: [...x.hitMargins]
+			})
+		);
 
 		for (const item of data) {
 			if (!recordMap[item.id]) {
