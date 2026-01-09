@@ -70,8 +70,19 @@
 	>
 		{#each virtualItems as item, i (item.index)}
 			{@const record = records[item.index]}
-			<div bind:this={elements[i]} data-index={item.index}>
+			<div bind:this={elements[i]} data-index={item.index} class="relative">
 				<CourseRecord {record} ordinal={item.index + 1} isMultiple={totalLevelCount > 1} />
+				{#if item.index === 63}
+					<div
+						class="absolute bottom-0 left-0 w-full border-b-2 border-gg-yellow pointer-events-none select-none"
+					>
+						<div
+							class="bg-gg-yellow text-black translate-y-1/2 inline-flex px-2 py-0.5 rounded-md text-sm font-medium absolute left-0 bottom-0"
+						>
+							커트라인
+						</div>
+					</div>
+				{/if}
 			</div>
 		{/each}
 	</div>
