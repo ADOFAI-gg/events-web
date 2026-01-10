@@ -65,7 +65,7 @@ export const fetechCourseRecords = async (
 	}
 
 	const records = Object.values(aggregated).sort((a, b) => {
-		return b.xAccSum - a.xAccSum || a.createdAt - b.createdAt;
+		return b.sum.xAcc - a.sum.xAcc || a.createdAt - b.createdAt;
 	});
 
 	return {
