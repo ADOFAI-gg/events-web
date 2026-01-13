@@ -1,30 +1,55 @@
 import { encode } from '@adofai-gg/ui';
 import type { AggregatedReocrd, CourseRankingData, CourseRecord, HitMarginList } from '../types';
-import ky, { HTTPError } from 'ky';
-import type { RequestEvent } from '@sveltejs/kit';
+import ky, { HTTPError, type Options } from 'ky';
+
+export const fromUrlMap =
+	(urls: Record<string, string>, fetch: Options['fetch']) => (id: string) =>
+		urls[id]
+			? ky(urls[id], {
+					fetch
+				})
+					.json<CourseRankingData>()
+					.catch((e) => {
+						if (e instanceof HTTPError) {
+							if (e.response.status !== 404) return Promise.reject(e);
+						}
+
+						return {
+							records: [],
+							course: undefined
+						} as CourseRankingData;
+					})
+			: Promise.resolve({
+					records: [],
+					course: undefined
+				} as CourseRankingData);
+
+export const fromCourseAPI = (fetch: Options['fetch']) => (id: string) =>
+	ky(encode`https://course.adofai.gg/api/courses/${id}/ranking`, {
+		fetch
+	})
+		.json<CourseRankingData>()
+		.catch((e) => {
+			if (e instanceof HTTPError) {
+				if (e.response.status !== 404) return Promise.reject(e);
+			}
+
+			return {
+				records: [],
+				course: undefined
+			} as CourseRankingData;
+		});
 
 export const fetechCourseRecords = async (
 	ids: string[],
-	{ fetch }: { fetch: RequestEvent['fetch'] }
+	fetcher: (id: string) => Promise<CourseRankingData>
+	// { fetch }: { fetch: RequestEvent['fetch'] }
 ) => {
 	const aggregated = {} as Record<string, AggregatedReocrd>;
 	let totalLevelCount = 0;
 
 	for (const id of ids) {
-		const res = await ky(encode`https://course.adofai.gg/api/courses/${id}/ranking`, {
-			fetch
-		})
-			.json<CourseRankingData>()
-			.catch((e) => {
-				if (e instanceof HTTPError) {
-					if (e.response.status !== 404) return Promise.reject(e);
-				}
-
-				return {
-					records: [],
-					course: undefined
-				} as CourseRankingData;
-			});
+		const res = await fetcher(id);
 
 		for (const record of res.records) {
 			const levels = res.course?.levels;

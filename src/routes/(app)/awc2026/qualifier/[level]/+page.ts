@@ -1,5 +1,17 @@
 import type { PageLoad } from './$types';
-import { fetechCourseRecords } from '../../util/aggregator';
+import { fetechCourseRecords, fromCourseAPI, fromUrlMap } from '../../util/aggregator';
+
+const urls = Object.fromEntries(
+	Object.entries(
+		import.meta.glob('./data/*.json', {
+			query: '?url',
+			eager: true
+		})
+	).map(([k, v]) => [
+		k.slice('./data/'.length, k.length - '.json'.length),
+		(v as { default: string }).default
+	])
+);
 
 const levels = {
 	a: '693d40de801b21c1c39569ea',
@@ -17,7 +29,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		ids.push(params.level);
 	}
 
-	const { records, totalLevelCount } = await fetechCourseRecords(ids, { fetch });
+	const { records, totalLevelCount } = await fetechCourseRecords(ids, fromUrlMap(urls, fetch));
 
 	return {
 		records,
