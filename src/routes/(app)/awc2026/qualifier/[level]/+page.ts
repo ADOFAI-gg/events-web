@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import { fetechCourseRecords, fromCourseAPI, fromUrlMap } from '../../util/aggregator';
+import { fetechCourseRecords, fromUrlMap } from '$lib/course/util/aggregator';
 
 const urls = Object.fromEntries(
 	Object.entries(
@@ -29,10 +29,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		ids.push(params.level);
 	}
 
-	const { records, totalLevelCount } = await fetechCourseRecords(ids, fromUrlMap(urls, fetch));
+	const data = await fetechCourseRecords(ids, fromUrlMap(urls, fetch));
 
-	return {
-		records,
-		totalLevelCount
-	};
+	return { data };
 };
