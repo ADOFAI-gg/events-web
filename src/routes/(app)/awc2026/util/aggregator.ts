@@ -2,6 +2,12 @@ import { encode } from '@adofai-gg/ui';
 import type { AggregatedReocrd, CourseRankingData, CourseRecord, HitMarginList } from '../types';
 import ky, { HTTPError, type Options } from 'ky';
 
+const defaultData = () =>
+	({
+		records: [],
+		course: undefined
+	}) as CourseRankingData;
+
 export const fromUrlMap =
 	(urls: Record<string, string>, fetch: Options['fetch']) => (id: string) =>
 		urls[id]
@@ -14,15 +20,9 @@ export const fromUrlMap =
 							if (e.response.status !== 404) return Promise.reject(e);
 						}
 
-						return {
-							records: [],
-							course: undefined
-						} as CourseRankingData;
+						return defaultData();
 					})
-			: Promise.resolve({
-					records: [],
-					course: undefined
-				} as CourseRankingData);
+			: Promise.resolve(defaultData());
 
 export const fromCourseAPI = (fetch: Options['fetch']) => (id: string) =>
 	ky(encode`https://course.adofai.gg/api/courses/${id}/ranking`, {
@@ -34,10 +34,7 @@ export const fromCourseAPI = (fetch: Options['fetch']) => (id: string) =>
 				if (e.response.status !== 404) return Promise.reject(e);
 			}
 
-			return {
-				records: [],
-				course: undefined
-			} as CourseRankingData;
+			return defaultData();
 		});
 
 export const fetechCourseRecords = async (
