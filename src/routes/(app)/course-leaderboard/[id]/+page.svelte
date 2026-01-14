@@ -9,4 +9,4 @@
 	Custom Leaderboard for Course {params.id}
 </h1>
 
-<CourseList data={data.data} />
+<CourseList data={data.data} cutLinePosition={-1} />

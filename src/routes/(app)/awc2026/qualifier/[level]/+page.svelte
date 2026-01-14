@@ -40,4 +40,4 @@
 	{/each}
 </div>
 
-<CourseList data={data.data} />
+<CourseList data={data.data} cutLinePosition={64} />

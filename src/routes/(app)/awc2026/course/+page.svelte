@@ -10,4 +10,4 @@
 	<Localized id="awc2026-course-title" />
 </h1>
 
-<CourseList data={data.data} />
+<CourseList data={data.data} cutLinePosition={16} />

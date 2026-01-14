@@ -5,9 +5,11 @@
 	import { Localized } from '@nubolab-ffwd/svelte-fluent';
 
 	const {
-		data
+		data,
+		cutLinePosition
 	}: {
 		data: Awaited<ReturnType<typeof fetechCourseRecords>>;
+		cutLinePosition: number;
 	} = $props();
 
 	const { records, totalLevelCount } = $derived(data);
@@ -41,7 +43,7 @@
 			{@const record = records[item.index]}
 			<div bind:this={elements[i]} data-index={item.index} class="relative">
 				<CourseRecord {record} ordinal={item.index + 1} isMultiple={totalLevelCount > 1} />
-				{#if item.index === 63}
+				{#if item.index === cutLinePosition - 1}
 					<div
 						class="absolute z-50 bottom-0 left-0 w-full border-b-2 border-gg-yellow pointer-events-none select-none"
 					>
