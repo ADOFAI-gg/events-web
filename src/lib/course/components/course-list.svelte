@@ -3,6 +3,7 @@
 	import { createWindowVirtualizer } from '$lib/virtualizer.svelte';
 	import CourseRecord from './course-record.svelte';
 	import { Localized } from '@nubolab-ffwd/svelte-fluent';
+	import { browser } from '$app/environment';
 
 	const {
 		data,
@@ -30,6 +31,11 @@
 	});
 
 	const virtualItems = $derived(virtualizer.getVirtualItems());
+
+	$effect(() => {
+		// @ts-expect-error for for in conosle
+		if (browser) window.courseRecords = records;
+	});
 </script>
 
 <div class="mt-4 relative" style="height: {virtualizer.getTotalSize()}px;">
